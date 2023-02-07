@@ -1,98 +1,252 @@
-*{
-    margin: 0;
-    padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #091921;
+.row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #091921;
+  font-family: 'Poppins', sans-serif;
 }
 
-.clock{
-    width: 350px;
-    height: 350px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url(clock.png);
-    background-size: cover;
-    border: 4px solid #091921;
-    border-radius: 50%;
-    box-shadow: 0 -15px 15px rgba(255, 255, 255, 0.05),
-                inset 0 -15px 15px rgba(255, 255, 255, 0.05),
-                0 15px 15px rgba(255, 255, 255, 0.05),
-                inset 0 15px 15px rgba(255, 255, 255, 0.05)  ;                                    
-                                                        
+.clock {
+  width: 350px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(clock.png);
+  background-size: cover;
+  border: 4px solid #091921;
+  border-radius: 50%;
+  box-shadow: 0 -15px 15px rgba(255, 255, 255, 0.05),
+    inset 0 -15px 15px rgba(255, 255, 255, 0.05),
+    0 15px 15px rgba(255, 255, 255, 0.05),
+    inset 0 15px 15px rgba(255, 255, 255, 0.05);
 }
 
-.clock::before{
-    content: '';
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background-color: #fff;
-    border-radius: 50%;
-    z-index: 100;
+.clock::before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #fff;
+  border-radius: 50%;
+  z-index: 100;
 }
 
 .clock .hour,
 .clock .min,
-.clock .sec
-{
-    position: absolute;
+.clock .sec {
+  position: absolute;
 }
 
-.clock .hour, .hr{
-    width: 160px;
-    height: 160px;
+.clock .hour,
+.hr {
+  width: 160px;
+  height: 160px;
 }
 
-.clock .min, .mn{
-    width: 190px;
-    height: 190px;
+.clock .min,
+.mn {
+  width: 190px;
+  height: 190px;
 }
 
-.clock .sec,  .sc{
-    width: 230px;
-    height: 230px;
+.clock .sec,
+.sc {
+  width: 230px;
+  height: 230px;
 }
 
-.hr, .mn , .sc{
-    display: flex;
-    justify-content: center ;
-    position: absolute;
-    border-radius: 50%;
+.hr,
+.mn,
+.sc {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  border-radius: 50%;
 }
 
-.hr::before{
+.hr::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 80px;
+  background: #ff105e;
+  z-index: 10;
+  border-radius: 6px 6px 0 0;
+}
+.mn::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 90px;
+  background: #fff;
+  z-index: 11;
+  border-radius: 6px 6px 0 0;
+}
+.sc::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 150px;
+  background: #fff;
+  z-index: 12;
+  border-radius: 6px 6px 0 0;
+}
+
+/* Digital */
+
+.digital-clock {
+  position: relative;
+  color: #fff;
+  background-color: #091921;
+  width: 425px;
+  padding: 20px 45px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.digital-clock::after {
+  position: absolute;
+  content: '';
+  top: 15px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.9) translateZ(0);
+  filter: blur(15px);
+  background: linear-gradient(
+    to left,
+    #ff5770,
+    #e4428d,
+    #c42da8,
+    #9e16c3,
+    #6501de,
+    #9e16c3,
+    #c42da8,
+    #e4428d,
+    #ff5770
+  );
+  background-size: 200% 200%;
+  animation: animateGlow 1.25s linear infinite;
+}
+/* .digital-clock::before{
     content: '';
     position: absolute;
-    width: 8px;
-    height:  80px;
-    background: #ff105e;
-    z-index: 10;
-    border-radius:6px 6px 0 0 ;
-}
-.mn::before{
-    content: '';
-    position: absolute;
-    width: 4px;
-    height: 90px;
-    background: #fff;
-    z-index: 11;
-    border-radius:6px 6px 0 0 ;
-}
-.sc::before{
-    content: '';
-    position: absolute;
-    width: 2px;
-    height: 150px;
-    background: #fff;
-    z-index: 12;
-    border-radius:6px 6px 0 0 ;
+    background: linear-gradient(45deg,#24ff6d,#2f93f1,#ff5e9a);
+    background-size: 200% 200%;
+    top: -5px;
+    left: -5px;
+    bottom: -5px;
+    right: -5px;
+    z-index: -1;
+      /* filter: blur(40px);
+     animation: glowing 10s ease infinite; }*/
+
+@keyframes animateGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
 }
 
+.time {
+  /* padding: 20px; */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dhour,
+.dots,
+.dmin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  padding: 0 10px;
+  line-height: 125px;
+}
+.dhour,
+.dmin {
+  font-size: 6.5em;
+  width: 125px;
+}
+.dots {
+  font-size: 5em;
+  color: #929292;
+}
 
+.dhour {
+  background: -webkit-linear-gradient(90deg, #634dff, #5fd4ff);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.dmin {
+  background: -webkit-linear-gradient(90deg, #ff5e9a, #ffb960);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.right-side {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.per,
+.dsec {
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+.per {
+  transform: translateY(-20px);
+  background: -webkit-linear-gradient(90deg, #f9ba45, #faf879);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.dsec {
+  transform: translateY(16px);
+  background: -webkit-linear-gradient(90deg, #24ff6d, #2f93f1);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.calender {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em;
+  font-weight: 500;
+  margin-bottom: 5px;
+  background: -webkit-linear-gradient(90deg, #ae4af6, #ff98d1);
+  /* -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; */
+}
+
+.d-n,
+.m-n,
+.d-num {
+  margin-right: 8px;
+}

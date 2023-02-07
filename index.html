@@ -1,42 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clock</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-    <div class="clock">
+
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="row">
+      <div class="clock col-lg-6">
         <div class="hour">
-            <div class="hr" id="hr" ></div>
+          <div class="hr" id="hr"></div>
         </div>
         <div class="min">
-            <div class="mn" id="mn" ></div>
+          <div class="mn" id="mn"></div>
         </div>
         <div class="sec">
-            <div class="sc" id="sc" ></div>
+          <div class="sc" id="sc"></div>
         </div>
+      </div>
+      <div class="digital-clock col-lg-4 col-md-4 col-sm-8">
+        <div class="time">
+          <span class="dhour">00</span>
+          <span class="dots">:</span>
+          <span class="dmin">00</span>
+          <div class="right-side">
+            <span class="per">AM/PM</span>
+            <span class="dsec">00</span>
+          </div>
+        </div>
+        <div class="calender">
+          <span class="m-n">Month </span>
+          <span class="d-n">Day </span>
+          <span class="d-num">00</span>
+          <span class="year">0000</span>
+        </div>
+      </div>
     </div>
-    <script type="text/javascript" >
-        const deg = 6;
-        const hr = document.querySelector("#hr");
-        const mn = document.querySelector("#mn");
-        const sc = document.querySelector("#sc");
 
-        setInterval(() => {
-            let day = new Date();
-            let hh = day.getHours() * 30;
-            let mm = day.getMinutes() * deg;
-            let ss = day.getSeconds() * deg;
+    <script type="text/javascript">
+      setInterval(() => {
+        // Analog
+        // const deg = 12;
+        const hr = document.querySelector('#hr');
+        const mn = document.querySelector('#mn');
+        const sc = document.querySelector('#sc');
+        let day = new Date();
+        hrt = day.getHours();
+        mint = day.getMinutes();
+        sect = day.getSeconds();
+        hr_rot = 30 * hrt + mint / 2;
+        min_rot = 6 * mint;
+        sec_rot = 6 * sect;
 
-            hr.style.transform = 'rotateZ('+ (hh) + (mm/12) +'deg)'; 
-            mn.style.transform = 'rotateZ('+ mm +'deg  )';
-            sc.style.transform = 'rotateZ('+ss+'deg )';
-        }, 1000);
-            
-        
+        hr.style.transform = 'rotate(' + hr_rot + 'deg)';
+        mn.style.transform = 'rotate(' + min_rot + 'deg  )';
+        sc.style.transform = 'rotate(' + sec_rot + 'deg )';
+      }, 1000);
+
+      function dclock() {
+        let day = new Date();
+
+        let hh = day.getHours();
+        let mm = day.getMinutes();
+        let ss = day.getSeconds();
+        let peri = 'AM';
+
+        if (hh >= 12) {
+          peri = 'PM';
+        }
+
+        hh = hh > 12 ? hh % 12 : hh;
+
+        if (hh < 10) {
+          hh = '0' + hh;
+        }
+        if (mm < 10) {
+          mm = '0' + mm;
+        }
+        if (ss < 10) {
+          ss = '0' + ss;
+        }
+
+        document.querySelector('.dhour').innerHTML = hh;
+        document.querySelector('.dmin').innerHTML = mm;
+        document.querySelector('.dsec').innerHTML = ss;
+        document.querySelector('.per').innerHTML = peri;
+      }
+      var updateClock = setInterval(dclock, 1000);
+
+      var today = new Date();
+      const dnum = today.getDate();
+      const year = today.getFullYear();
+      const dname = today.toLocaleString('default', { weekday: 'long' });
+      const mname = today.toLocaleString('default', { month: 'short' });
+
+      document.querySelector('.d-n').innerHTML = dname;
+      document.querySelector('.m-n').innerHTML = mname;
+      document.querySelector('.d-num').innerHTML = dnum;
+      document.querySelector('.year').innerHTML = year;
     </script>
-</body>
+  </body>
 </html>
